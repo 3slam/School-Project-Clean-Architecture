@@ -36,18 +36,18 @@
 # Screens
 
 <div>
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/e30adb1a-31a1-4504-88d1-8b3bd2b40fb6.jpg" width="400" hight="500">
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/ba0decd0-2459-4bb3-aaaf-c411ce464472.jpg" width="400" hight="500" >
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/e30adb1a-31a1-4504-88d1-8b3bd2b40fb6.jpg" width="600" hight="500">
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/ba0decd0-2459-4bb3-aaaf-c411ce464472.jpg" width="600" hight="500" >
 
 </div>
 
 <div>
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/9ee76036-a070-40a4-af6a-35a4378271d5.jpg" width="400" hight="500">
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/66970631-bd61-4e8c-ab80-6c9eba592f23.jpg" width="400" hight="500" >
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/9ee76036-a070-40a4-af6a-35a4378271d5.jpg" width="600" hight="500">
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/66970631-bd61-4e8c-ab80-6c9eba592f23.jpg" width="600" hight="500" >
 </div>
 
 <div>
-  <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/051cb7c6-2e71-412e-a8fe-a4bcf05f0789.jpg" width="400" hight="500" >
+  <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/051cb7c6-2e71-412e-a8fe-a4bcf05f0789.jpg" width="600" hight="500" >
 </div>
 
 # Thanks For Reading.❤
