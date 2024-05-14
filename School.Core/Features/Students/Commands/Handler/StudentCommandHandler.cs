@@ -53,8 +53,9 @@ namespace School.Core.Features.Students.Commands.Handler
                     error = error + item.ErrorMessage;
                 return BadRequest<string>(error);
             }
+            Student student = studentService.GetById(request.StudentId);
 
-            var isDeletedSuccess = await studentService.DeleteAsync(mapper.Map<Student>(request));
+            var isDeletedSuccess = await studentService.DeleteAsync(student);
             if (isDeletedSuccess == "Success") return Deleted<string>();
             return BadRequest<string>(isDeletedSuccess);
         }
