@@ -21,7 +21,7 @@ namespace School.Core.Features.Authorization.Command.Validations
                 .NotNull().WithMessage("The {PropertyName} must be not empty");
 
             RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("The {PropertyName} must be not empty")
+                .NotEmpty().WithMessage("The {PropertyName} must be not empty") // false
                 .NotNull().WithMessage("The {PropertyName} must be not empty");
         }
 

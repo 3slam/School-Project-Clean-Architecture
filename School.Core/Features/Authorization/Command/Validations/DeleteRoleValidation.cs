@@ -18,8 +18,7 @@ namespace School.Core.Features.Authorization.Command.Validations
         public void ApplyCustomValidationsRules()
         {
             RuleFor(x => x.Id)
-                .MustAsync(async (Key, CancellationToken) =>
-                 await authorizationService.IsRoleExistById(Key))
+                .MustAsync(async (Key, CancellationToken) => await authorizationService.IsRoleExistById(Key)) // flase !
                 .WithMessage("The {PropertyName} is not Exist in the system");
         }
 

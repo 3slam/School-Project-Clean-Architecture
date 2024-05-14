@@ -25,7 +25,7 @@ namespace School.Core.Features.Authorization.Command.Validations
         {
             RuleFor(x => x.RoleName)
                 .MustAsync(async (Key, CancellationToken) =>
-                  !await authorizationService.IsRoleExistByName(Key)) // yes - no
+                 !await authorizationService.IsRoleExistByName(Key)) // yes - no
                 .WithMessage("The {PropertyName} is already Exist in the system");
         }
 
