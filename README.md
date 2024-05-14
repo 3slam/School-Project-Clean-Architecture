@@ -1,17 +1,16 @@
 # School ASP.Net Web API
 
-# Technologies
-## List the technologies, frameworks, and libraries used in your project.
+## Technologies
 
-### ASP.NET Core
-### Entity Framework Core (EF Core)
-### C# language
-### LINQ queries
-### SQL Server
-### Swagger
-### Postman
+1. ASP.NET Core
+2. Entity Framework Core (EF Core)
+3. C# language
+4. LINQ queries
+5. SQL Server
+6. Swagger
+7. Postman
 
-# I Used In My Code :
+## I Used In My Code :
 
 1. Clean Architecture
 2. CQRS Design Pattern
@@ -37,14 +36,18 @@
 # Screens
 
 <div>
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/e30adb1a-31a1-4504-88d1-8b3bd2b40fb6.jpg" width="250" hight="400">
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/ba0decd0-2459-4bb3-aaaf-c411ce464472.jpg" width="250" hight="400" >
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/051cb7c6-2e71-412e-a8fe-a4bcf05f0789.jpg" width="250" hight="400" >
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/e30adb1a-31a1-4504-88d1-8b3bd2b40fb6.jpg" width="300" hight="400">
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/ba0decd0-2459-4bb3-aaaf-c411ce464472.jpg" width="300" hight="400" >
+
 </div>
 
 <div>
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/9ee76036-a070-40a4-af6a-35a4378271d5.jpg" width="250" hight="400">
- <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/66970631-bd61-4e8c-ab80-6c9eba592f23.jpg" width="250" hight="400" >
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/9ee76036-a070-40a4-af6a-35a4378271d5.jpg" width="300" hight="400">
+ <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/66970631-bd61-4e8c-ab80-6c9eba592f23.jpg" width="300" hight="400" >
+</div>
+
+<div>
+  <img src ="https://github.com/3slam/Music_Player_APP/assets/82102228/051cb7c6-2e71-412e-a8fe-a4bcf05f0789.jpg" width="400" hight="400" >
 </div>
 
 # Thanks For Reading.❤
