@@ -7,9 +7,6 @@ namespace School.Core.Features.Users.Command.Validations
     {
         public EditUserValidation()
         {
-            RuleFor(x => x.Id)
-          .NotEmpty().WithMessage("ID cannot be empty.")
-          .NotNull().WithMessage("ID is required.");
 
 
             RuleFor(x => x.FullName)

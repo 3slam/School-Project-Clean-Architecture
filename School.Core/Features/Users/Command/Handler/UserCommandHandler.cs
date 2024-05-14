@@ -119,7 +119,7 @@ namespace School.Core.Features.Users.Command.Handler
 
 
 
-            var user = await userManager.FindByIdAsync(request.Id);
+            var user = await userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
                 return NotFound<string>("User does not exist in the system");
@@ -145,7 +145,7 @@ namespace School.Core.Features.Users.Command.Handler
                 return BadRequest<string>(error);
             }
 
-            var user = await userManager.FindByIdAsync(request.Id);
+            var user = await userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
                 return NotFound<string>("User does not exist in the system");
