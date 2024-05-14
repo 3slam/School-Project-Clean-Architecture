@@ -44,8 +44,8 @@ namespace School.Core.Features.Departments.Commands.Handler
                     error = error + item.ErrorMessage;
                 return BadRequest<string>(error);
             }
-
-            var isDeletedSuccess = await departmentService.DeleteAsync(mapper.Map<Data.Entities.Department>(request));
+            Data.Entities.Department department = departmentService.GetById(request.DepartmentId);
+            var isDeletedSuccess = await departmentService.DeleteAsync(department);
             if (isDeletedSuccess == "Success") return Deleted<string>();
             return BadRequest<string>(isDeletedSuccess);
         }
