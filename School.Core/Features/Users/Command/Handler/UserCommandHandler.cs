@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using School.Core.Bases;
@@ -15,7 +14,6 @@ namespace School.Core.Features.Users.Command.Handler
     public class UserCommandHandler(
         IEmailService emailService,
 
-        IHttpContextAccessor httpContextAccessor,
         IAuthenticationService authenticationService,
        IStringLocalizer<SharedResourses> localizer,
        IMapper mapper,
@@ -53,23 +51,15 @@ namespace School.Core.Features.Users.Command.Handler
             {
                 var userAfterMapping = mapper.Map<User>(request);
                 userAfterMapping.RefreshToken = (await authenticationService.GenerateJWTToken(userAfterMapping)).RefreshToken;
-                var result = await userManager
-                    .CreateAsync(userAfterMapping, request.Password);
+                var result = await userManager.CreateAsync(userAfterMapping, request.Password);
 
                 if (result.Succeeded)
                 {
 
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(userAfterMapping);
-                    var resquestAccessor = httpContextAccessor.HttpContext.Request;
-
-
-                    // this code is not correct we need to add Url.Action(contrlloer , action , pars)
-                    var url = "ConfirmEmail";
-
-                    var returnUrl = resquestAccessor.Scheme + $"://localhost:7016/Api/v1/" + url;
-                    var message = $"To Confirm Email Click Link: <a href='{returnUrl}'>Link Of Confirmation</a>";
+                    var message = $"your confirmation code is = {code}";
                     await emailService.SendEmailAsync(request.Email, "Confirm Email", message, true);
-                    return Success("created successfully go to your email to confirm...");
+                    return Success("created successfully.");
                 }
                 return BadRequest<string>($"Some thing went wrong , {result.Errors.FirstOrDefault().Description}");
             }

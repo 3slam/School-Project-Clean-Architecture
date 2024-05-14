@@ -56,6 +56,13 @@ namespace School.Core.Features.Authentication.Command.Handler
             if (!signInResult.Succeeded)
                 return BadRequest<JwtToken>("Sign in fail , check password is correct!");
 
+            if (user.EmailConfirmed == false)
+            {
+                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var message = $"your confirmation code is = {code}";
+                await emailService.SendEmailAsync(request.Email, "Confirm Email", message, true);
+                return BadRequest<JwtToken>("You need to confirm your account first ... go to your email");
+            }
             try
             {
                 var result = await authenticationService.GenerateJWTToken(user);

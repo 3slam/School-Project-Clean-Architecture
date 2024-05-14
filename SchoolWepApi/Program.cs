@@ -52,6 +52,7 @@ namespace SchoolWepApi
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
             builder.Services.AddAuthorization(option =>
             {
                 option.AddPolicy("Create", policy =>
@@ -104,8 +105,6 @@ namespace SchoolWepApi
                 options.Password.RequiredUniqueChars = 0;
 
             }).AddEntityFrameworkStores<ApplicationDatabaseContext>().AddDefaultTokenProviders();
-
-
 
 
             var app = builder.Build();

@@ -71,6 +71,7 @@ namespace School.Service.ServiceImp
 
             var claims = new List<Claim>()
             {
+              new Claim(ClaimTypes.NameIdentifier,user.Id),
               new Claim(ClaimTypes.Name,user.FullName),
               new Claim(ClaimTypes.Email, user.Email),
               new Claim(ClaimTypes.NameIdentifier, user.Id),
