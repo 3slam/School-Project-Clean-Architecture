@@ -1,4 +1,6 @@
 ﻿using School.Data.Entities;
+using School.Data.Entities.StoreProc;
+using School.Data.Entities.Views;
 using School.Data.Helpers;
 using School.Infrastructure.IRepository;
 using School.Service.IService;
@@ -82,6 +84,17 @@ namespace School.Service.ServiceImp
 
             }
             return query;
+        }
+
+        public Task<List<StudentWithDepartmentDetailsView>> GetStudentWithDepartmentDetailsView()
+        {
+            return studentRepository.GetStudentWithDepartmentDetailsView();
+        }
+
+        public async Task<List<GetDepartmentStudentsProc>> GetDepartmentStudentsProc(int depId)
+        {
+
+            return await studentRepository.GetDepartmentStudentsProc(depId);
         }
 
         public async Task<bool> IsIdExistAsync(int id)

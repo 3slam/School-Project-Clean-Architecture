@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using School.Data.Entities;
 using School.Data.Requests;
 
 namespace School.Service.IService
@@ -10,6 +11,8 @@ namespace School.Service.IService
         public Task<string> EditRoleAsync(EditRoleRequest request);
         public Task<string> DeleteRoleAsync(string roleId);
         public Task<bool> IsRoleExistById(string roleId);
+        public Task<bool> AreRolesExistById(List<UserRole> roles);
+        public Task<bool> AreRolesExistByName(List<UserRole> roles);
 
         public Task<IQueryable> GetRolesListQueryable();
         public Task<List<IdentityRole>> GetRolesList();
@@ -18,7 +21,7 @@ namespace School.Service.IService
 
         public Task<List<string>> GetUserRoles(string userId);
 
-        //public Task<string> UpdateUserRoles(UpdateUserRolesRequest request);
+        public Task<string> UpdateUserRoles(UpdateUserRolesRequest request);
         //public Task<ManageUserClaimsResult> ManageUserClaimData(User user);
         //public Task<string> UpdateUserClaims(UpdateUserClaimsRequest request);
     }

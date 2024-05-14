@@ -9,9 +9,13 @@ namespace School.Service
         public static IServiceCollection AddServiceDependcies(this IServiceCollection services)
         {
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IFileService, FileService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
+
+
+            services.AddTransient<IEmailService, EmailService>();
             return services;
         }
     }

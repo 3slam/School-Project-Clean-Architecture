@@ -16,6 +16,7 @@ namespace SchoolWepApi.Controllers
         private readonly IMediator mediator = mediator;
 
 
+        [Authorize(Policy = "Create")]
         [HttpPost(Router.AuthorizationRouting.AddRole)]
         public async Task<IActionResult> AddRole([FromBody] AddRoleCommand command)
         {
@@ -23,7 +24,7 @@ namespace SchoolWepApi.Controllers
         }
 
 
-        [HttpPost(Router.AuthorizationRouting.EditRole)]
+        [HttpPut(Router.AuthorizationRouting.EditRole)]
         public async Task<IActionResult> EditRole([FromBody] EditRoleCommand command)
         {
             return Result(await mediator.Send(command));
@@ -31,14 +32,14 @@ namespace SchoolWepApi.Controllers
 
 
 
-        [HttpPost(Router.AuthorizationRouting.DeleteRole)]
+        [HttpDelete(Router.AuthorizationRouting.DeleteRole)]
         public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command)
         {
             return Result(await mediator.Send(command));
         }
 
 
-        [HttpPost(Router.AuthorizationRouting.GetSingleRole)]
+        [HttpGet(Router.AuthorizationRouting.GetSingleRole)]
         public async Task<IActionResult> GetSingleRole([FromBody] GetSingleRoleByIdQuery command)
         {
             return Result(await mediator.Send(command));
@@ -55,6 +56,12 @@ namespace SchoolWepApi.Controllers
 
         [HttpPost(Router.AuthorizationRouting.GetUserRolesByUserId)]
         public async Task<IActionResult> GetUserRolesByUserId([FromBody] GetUserRolesByUserIdQuery command)
+        {
+            return Result(await mediator.Send(command));
+        }
+
+        [HttpPost(Router.AuthorizationRouting.UpdateUserRolesByUserId)]
+        public async Task<IActionResult> UpdateUserRolesByUserId([FromBody] UpdateUserRolesCommand command)
         {
             return Result(await mediator.Send(command));
         }

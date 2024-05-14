@@ -1,17 +1,24 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 using School.Core.Bases;
 using School.Core.Features.Students.Commands.Models;
 using School.Core.Features.Students.Commands.Validations;
+using School.Data.Constants;
 using School.Data.Entities;
 using School.Data.Resourses;
 using School.Service.IService;
 
 namespace School.Core.Features.Students.Commands.Handler
 {
-    public class StudentDepartmentHandler(IStringLocalizer<SharedResourses> localizer, IStudentService studentService, IMapper mapper)
-        : ResponseHandler(localizer),
+    public class StudentDepartmentHandler(
+        IStringLocalizer<SharedResourses> localizer,
+
+        IFileService fileService,
+        IStudentService studentService,
+        IMapper mapper)
+          : ResponseHandler(localizer),
            IRequestHandler<AddStudentCommand, Response<string>>,
            IRequestHandler<DeleteStudentCommand, Response<string>>
     {
@@ -28,8 +35,9 @@ namespace School.Core.Features.Students.Commands.Handler
                     error = error + item.ErrorMessage;
                 return BadRequest<string>(error);
             }
-
-            return Created(await studentService.AddStudnetAsync(mapper.Map<Student>(request)),
+            Student afterMapping = mapper.Map<Student>(request);
+            afterMapping.Image = await IFormFileToString(request.ImageFile);
+            return Created(await studentService.AddStudnetAsync(afterMapping),
                 Meta: new { Name = request.FirstName + " " + request.LastName, StudentId = request.Id }
             );
         }
@@ -50,5 +58,20 @@ namespace School.Core.Features.Students.Commands.Handler
             if (isDeletedSuccess == "Success") return Deleted<string>();
             return BadRequest<string>(isDeletedSuccess);
         }
+
+        private async Task<string?> IFormFileToString(IFormFile file)
+        {
+            var imageUrl = await fileService.UploadImage("Instructors", file);
+
+            switch (imageUrl)
+            {
+                case UplaodingImageState.Error: return null;
+                case UplaodingImageState.NoImage: return null;
+                default: return imageUrl;
+            }
+
+        }
     }
+
+
 }

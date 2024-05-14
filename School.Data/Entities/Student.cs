@@ -19,6 +19,8 @@ public  class Student
     [Required]
     public string StAddress { get; set; }
 
+    public string? Image { get; set; }
+
     public int? StAge { get; set; }
 
     [ForeignKey("Department")]

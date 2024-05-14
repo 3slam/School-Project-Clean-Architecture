@@ -12,5 +12,7 @@
 
         public string DepartmentName { get; set; }
 
+        public string Image { get; set; }
+
     }
 }

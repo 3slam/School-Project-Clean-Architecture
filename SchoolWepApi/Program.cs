@@ -1,3 +1,4 @@
+using AspNetCore.IServiceCollection.AddIUrlHelper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
@@ -8,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using School.Data.Entities;
 using School.Infrastructure;
 using School.Service;
+using SchoolWepApi.MiddleWares;
 using System.Globalization;
 using System.Text;
 namespace SchoolWepApi
@@ -18,7 +20,7 @@ namespace SchoolWepApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
+            builder.Services.AddUrlHelper();
 
             builder.Services.AddControllers();
 
@@ -50,7 +52,13 @@ namespace SchoolWepApi
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(option =>
+            {
+                option.AddPolicy("Create", policy =>
+                {
+                    policy.RequireClaim("Create", "True");
+                });
+            });
 
             #region Localization
 
@@ -97,6 +105,9 @@ namespace SchoolWepApi
 
             }).AddEntityFrameworkStores<ApplicationDatabaseContext>().AddDefaultTokenProviders();
 
+
+
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -109,7 +120,7 @@ namespace SchoolWepApi
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseMiddleware<LimitNumberOfRequestsMiddleWare>();
             app.MapControllers();
 
             var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();

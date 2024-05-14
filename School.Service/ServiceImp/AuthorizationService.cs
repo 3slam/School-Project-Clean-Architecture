@@ -27,6 +27,26 @@ namespace School.Service.ServiceImp
             return State.Failed;
         }
 
+        public async Task<bool> AreRolesExistById(List<UserRole> roles)
+        {
+            foreach (var role in roles)
+            {
+                if (await roleManager.FindByIdAsync(role.Id) == null) return false;
+
+            }
+            return true;
+        }
+
+        public async Task<bool> AreRolesExistByName(List<UserRole> roles)
+        {
+            foreach (var role in roles)
+            {
+                if (await roleManager.FindByNameAsync(role.Name) == null) return false;
+
+            }
+            return true;
+        }
+
         public async Task<string> DeleteRoleAsync(string roleId)
         {
             var role = await roleManager.FindByIdAsync(roleId);
@@ -82,6 +102,38 @@ namespace School.Service.ServiceImp
             var role = await roleManager.FindByNameAsync(roleName);
             if (role == null) return false;
             return true;
+        }
+
+        public async Task<string> UpdateUserRoles(UpdateUserRolesRequest request)
+        {
+            var user = await userManager.FindByIdAsync(request.UserId);
+            if (user == null) return State.Failed;
+
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            foreach (var item in request.Roles)
+            {
+                var role = await roleManager.FindByIdAsync(item.Id);
+                if (role == null) return State.Failed;
+
+                if (item.HasRole == false)
+                {
+                    if (await userManager.IsInRoleAsync(user, item.Id))
+                    {
+                        await userManager.RemoveFromRoleAsync(user, item.Id);
+                    }
+                }
+                else
+                {
+                    if (!await userManager.IsInRoleAsync(user, item.Id))
+                    {
+                        await userManager.AddToRolesAsync(user, new List<string>() { item.Name });
+                    }
+                }
+            }
+            await userManager.UpdateAsync(user);
+            return State.Success;
+
         }
     }
 }

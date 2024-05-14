@@ -3,13 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using School.Core.Features.Users.Command.Model;
 using School.Core.Features.Users.Queries.Models;
 using School.Data.AppMetaData;
+using School.Infrastructure;
 using SchoolWepApi.Bases;
 
 namespace SchoolWepApi.Controllers
 {
     [ApiController]
 
-    public class UserController(IMediator mediator) : AppController
+    public class UserController(
+        IMediator mediator,
+        ApplicationDatabaseContext context
+        ) : AppController
     {
         private readonly IMediator mediator = mediator;
 
@@ -51,6 +55,9 @@ namespace SchoolWepApi.Controllers
         {
             return Ok(await mediator.Send(query));
         }
+
+
+
 
 
     }

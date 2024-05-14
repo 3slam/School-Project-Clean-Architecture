@@ -18,7 +18,10 @@ namespace School.Core.Features.Students.Queries.Handler
         : ResponseHandler(localizer),
         IRequestHandler<GetStudentListQuery, Response<List<GetStudentListResponse>>>,
         IRequestHandler<GetStudentByIdQuery, Response<GetSingleStudentResponse>>,
-        IRequestHandler<GetPaginationStudentListQuery, Response<PaginationResponse<GetStudentListResponse>>>
+        IRequestHandler<GetPaginationStudentListQuery, Response<PaginationResponse<GetStudentListResponse>>>,
+        IRequestHandler<GetStudentListInDepartmentByDeptIdQuery, Response<List<GetStudentListInDepartmentByDeptIdResponse>>>,
+        IRequestHandler<GetStudentWithDepartmentDetailsQuery, Response<List<StudentWithDepartmentDetailsResponse>>>
+
     {
         private readonly IStudentService studentService = studentService;
         private readonly IMapper mapper = mapper;
@@ -26,7 +29,7 @@ namespace School.Core.Features.Students.Queries.Handler
         public async Task<Response<List<GetStudentListResponse>>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
         {
             var list = await studentService.GetAllStudents();
-            return Success(entity: mapper.Map<List<GetStudentListResponse>>(list), message: "Students retreved Successfully");
+            return Success(entity: mapper.Map<List<GetStudentListResponse>>(list), message: "Students retreived Successfully");
         }
 
         public async Task<Response<GetSingleStudentResponse>> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
@@ -46,6 +49,36 @@ namespace School.Core.Features.Students.Queries.Handler
                 .ToPaginationListAsync(request.PageNumber, request.PageSize);
             return Success(PaginatedList);
 
+        }
+
+        public async Task<Response<List<GetStudentListInDepartmentByDeptIdResponse>>> Handle(GetStudentListInDepartmentByDeptIdQuery request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = await studentService.GetDepartmentStudentsProc(request.DepartmentID);
+                var resultAfterMapping = mapper.Map<List<GetStudentListInDepartmentByDeptIdResponse>>(result);
+
+                return Success(entity: resultAfterMapping, message: "Students retreived Successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest<List<GetStudentListInDepartmentByDeptIdResponse>>(ex.Message);
+            }
+        }
+
+        public async Task<Response<List<StudentWithDepartmentDetailsResponse>>> Handle(GetStudentWithDepartmentDetailsQuery request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = await studentService.GetStudentWithDepartmentDetailsView();
+                var resultAfterMapping = mapper.Map<List<StudentWithDepartmentDetailsResponse>>(result);
+
+                return Success(entity: resultAfterMapping, message: "Students retreived Successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest<List<StudentWithDepartmentDetailsResponse>>(ex.Message);
+            }
         }
     }
 }

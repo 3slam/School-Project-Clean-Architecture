@@ -68,6 +68,7 @@ namespace School.Service.ServiceImp
 
         private async Task<JwtSecurityToken> GenerateJwtSecurityToken(User user)
         {
+
             var claims = new List<Claim>()
             {
               new Claim(ClaimTypes.Name,user.FullName),
@@ -75,6 +76,9 @@ namespace School.Service.ServiceImp
               new Claim(ClaimTypes.NameIdentifier, user.Id),
               new Claim(JwtRegisteredClaimNames.Jti, new Guid().ToString())
             };
+
+            var userClaims = await userManager.GetClaimsAsync(user);
+            claims.AddRange(userClaims);
 
             var roles = await userManager.GetRolesAsync(user);
             foreach (var item in roles)

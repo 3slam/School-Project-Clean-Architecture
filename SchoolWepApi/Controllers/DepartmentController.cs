@@ -39,8 +39,7 @@ namespace SchoolWepApi.Controllers
         }
 
         [HttpGet(Router.DepartmentRouting.GetAllDepartmentUsingPagination)]
-        public async Task<IActionResult> GetAllDepartmentUsingPagination
-            ([FromQuery] GetPaginationDepartmentListQuery query)
+        public async Task<IActionResult> GetAllDepartmentUsingPagination([FromQuery] GetPaginationDepartmentListQuery query)
         {
             return Ok(await mediator.Send(query));
         }

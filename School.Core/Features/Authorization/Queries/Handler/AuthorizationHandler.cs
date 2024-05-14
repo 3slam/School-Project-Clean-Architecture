@@ -67,7 +67,7 @@ namespace School.Core.Features.Authorization.Queries.Handler
 
             var allRoles = await authorization.GetRolesList();
             GetUserRolesByUserIdResponse userRoles = new GetUserRolesByUserIdResponse();
-            var rolesList = new List<Role>();
+            var rolesList = new List<UserRole>();
 
             var user = await userManger.FindByIdAsync(request.Id);
 
@@ -83,7 +83,7 @@ namespace School.Core.Features.Authorization.Queries.Handler
                 if (await userManger.IsInRoleAsync(user, role.Name))
                 { hasRole = true; }
 
-                rolesList.Add(new Role(hasRole, role.Name, role.Id));
+                rolesList.Add(new UserRole(hasRole, role.Name, role.Id));
             }
            
             userRoles.Roles = rolesList;

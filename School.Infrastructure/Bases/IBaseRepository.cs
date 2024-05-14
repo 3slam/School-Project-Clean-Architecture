@@ -10,9 +10,8 @@ namespace School.Infrastructure.Bases
         Task<Boolean> IsIdExistAsync(int id);
 
         Task SaveChangesAsync();
-        IDbContextTransaction BeginTransaction();
-        void Commit();
-        void RollBack();
+
+
         IQueryable<T> GetTableNoTracking();
         IQueryable<T> GetTableAsTracking();
         Task<T> AddAsync(T entity);
@@ -20,5 +19,10 @@ namespace School.Infrastructure.Bases
         Task UpdateAsync(T entity);
         Task UpdateRangeAsync(ICollection<T> entities);
         Task DeleteAsync(T entity);
+
+
+        Task<IDbContextTransaction> BeginTransactionAsync();
+        Task CommitAsync(IDbContextTransaction transaction);
+        Task RollBackAsync(IDbContextTransaction transaction);
     }
 }

@@ -12,11 +12,15 @@ using School.Service.IService;
 
 namespace School.Core.Features.Authorization.Command.Handler
 {
-    public class AuthorizationHandler(IStringLocalizer<SharedResourses> localizer, IAuthorizationService authorization, IMapper mapper)
+    public class AuthorizationHandler(IStringLocalizer<SharedResourses> localizer,
+        IAuthorizationService authorization,
+        IMapper mapper)
         : ResponseHandler(localizer),
         IRequestHandler<AddRoleCommand, Response<string>>,
         IRequestHandler<DeleteRoleCommand, Response<string>>,
-        IRequestHandler<EditRoleCommand, Response<string>>
+        IRequestHandler<EditRoleCommand, Response<string>>,
+        IRequestHandler<UpdateUserRolesCommand, Response<string>>
+
     {
         public async Task<Response<string>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
         {
@@ -60,9 +64,9 @@ namespace School.Core.Features.Authorization.Command.Handler
             {
                 var addResult = await authorization.DeleteRoleAsync(request.Id);
                 if (addResult == State.Success)
-                    return Success("Role Deleted successfully");
+                    return Success("UserRole Deleted successfully");
 
-                return BadRequest<string>("Role Deleted failed");
+                return BadRequest<string>("UserRole Deleted failed");
             }
             catch (Exception ex)
             {
@@ -86,14 +90,33 @@ namespace School.Core.Features.Authorization.Command.Handler
             {
                 var addResult = await authorization.EditRoleAsync(request);
                 if (addResult == State.Success)
-                    return Success("Role Edited successfully");
+                    return Success("UserRole Edited successfully");
 
-                return BadRequest<string>("Role Edited failed");
+                return BadRequest<string>("UserRole Edited failed");
             }
             catch (Exception ex)
             {
                 return BadRequest<string>(ex.Message);
             }
+        }
+
+        public async Task<Response<string>> Handle(UpdateUserRolesCommand request, CancellationToken cancellationToken)
+        {
+            var validator = new UpdateUserRolesValidation(authorization);
+            var result = await validator.ValidateAsync(request);
+            string error = "";
+            if (result.IsValid == false)
+            {
+                foreach (var item in result.Errors)
+                    error = error + item.ErrorMessage;
+                return BadRequest<string>(error);
+            }
+
+            var updatingResult = await authorization.UpdateUserRoles(request);
+
+            if (updatingResult == State.Failed) return BadRequest<string>("Some Thing went incorrect");
+
+            return Success("Roles Updated Correctly");
         }
     }
 }

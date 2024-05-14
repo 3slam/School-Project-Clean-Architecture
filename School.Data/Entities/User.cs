@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EntityFrameworkCore.EncryptColumn.Attribute;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace School.Data.Entities
@@ -11,5 +12,8 @@ namespace School.Data.Entities
         public string? Country { get; set; }
 
         public RefreshToken? RefreshToken { get; set; }
+
+        [EncryptColumn]
+        public string Code { get; set; }
     }
 }

@@ -21,13 +21,13 @@ namespace SchoolWepApi.Controllers
         }
 
         [HttpGet(Router.StudentRouting.GetStudentById)]
-        public async Task<IActionResult> getAllStudents([FromRoute] int studentId)
+        public async Task<IActionResult> GetStudentById([FromRoute] int studentId)
         {
             return Result(await mediator.Send(new GetStudentByIdQuery(studentId)));
         }
 
         [HttpPost(Router.StudentRouting.CreateStudnet)]
-        public async Task<IActionResult> CreateStudnet([FromBody] AddStudentCommand command)
+        public async Task<IActionResult> CreateStudnet([FromForm] AddStudentCommand command)
         {
             return Result(await mediator.Send(command));
         }
@@ -44,5 +44,23 @@ namespace SchoolWepApi.Controllers
         {
             return Ok(await mediator.Send(query));
         }
+
+
+        [HttpGet(Router.StudentRouting.GetStudentListWithDepartmentDetails)]
+        public async Task<IActionResult> GetStudentListWithDepartmentDetails()
+        {
+            return Ok(await mediator.Send(new GetStudentWithDepartmentDetailsQuery()));
+        }
+
+
+        [HttpGet(Router.StudentRouting.GetStudentListInDepartmentByDeptID)]
+        public async Task<IActionResult> GetStudentListInDepartmentByDeptID
+            ([FromQuery] GetStudentListInDepartmentByDeptIdQuery query)
+        {
+            return Ok(await mediator.Send(query));
+        }
+
+
+
     }
 }

@@ -6,5 +6,7 @@ namespace School.Infrastructure.IRepository
     public interface IDepartmentRepository : IBaseRepository<Department>
     {
         Task<Boolean> IsIdExistOnceAsync(int id);
+
+
     }
 }

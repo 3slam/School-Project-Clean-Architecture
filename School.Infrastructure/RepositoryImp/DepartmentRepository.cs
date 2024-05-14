@@ -12,6 +12,8 @@ namespace School.Infrastructure.RepositoryImp
             _db = _dbContext;
         }
 
+
+
         public async Task<bool> IsIdExistOnceAsync(int id)
         {
             var count = _db.Departments.Where(d => d.DepartmentId == id).Count();

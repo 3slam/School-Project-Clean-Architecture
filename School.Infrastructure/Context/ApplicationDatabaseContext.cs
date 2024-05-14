@@ -2,23 +2,32 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using School.Data.Entities;
+using School.Data.Entities.Views;
 
 namespace School.Infrastructure;
 
 public partial class ApplicationDatabaseContext : IdentityDbContext
 {
+    private readonly IEncryptionProvider _encryptionProvider;
+
+   
+
     public ApplicationDatabaseContext(DbContextOptions<ApplicationDatabaseContext> options)
         : base(options)
     {
+        _encryptionProvider = new GenerateEncryptionProvider("8a4dcaaec");
     }
 
    
     public virtual DbSet<Department> Departments { get; set; }
 
     public virtual DbSet<User> User { get; set; }
+    public virtual DbSet<StudentWithDepartmentDetailsView> StudentWithDepartmentDetailsViews { get; set; }
     public virtual DbSet<Student> Students { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +38,17 @@ public partial class ApplicationDatabaseContext : IdentityDbContext
            new Department { DepartmentId = 2, DeptName = "Mathematics", DeptDesc = "Department of Mathematics", DeptLocation = "Building B", DeptManager = 2, ManagerHiredate = new DateOnly(2020, 1, 15) }
        );
         base.OnModelCreating(modelBuilder);
+
+
+        modelBuilder.Entity<StudentWithDepartmentDetailsView>(d =>
+        {
+            d.HasNoKey();
+            d.ToView("StudentWithDepartmentDetailsView");
+        });
+          
     }
+
+  
+ 
 
 }

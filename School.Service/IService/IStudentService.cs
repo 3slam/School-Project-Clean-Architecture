@@ -1,4 +1,6 @@
 ﻿using School.Data.Entities;
+using School.Data.Entities.StoreProc;
+using School.Data.Entities.Views;
 using School.Data.Helpers;
 
 namespace School.Service.IService
@@ -18,5 +20,10 @@ namespace School.Service.IService
             StudentOrderByEnum? OrderBy,
             string? Search
             );
+
+        public Task<List<GetDepartmentStudentsProc>> GetDepartmentStudentsProc(int depId);
+
+        public Task<List<StudentWithDepartmentDetailsView>> GetStudentWithDepartmentDetailsView();
+
     }
 }

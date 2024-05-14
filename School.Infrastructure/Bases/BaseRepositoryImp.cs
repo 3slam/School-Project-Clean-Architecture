@@ -64,24 +64,7 @@ namespace School.Infrastructure.Bases
             await _dbContext.SaveChangesAsync();
         }
 
-        public IDbContextTransaction BeginTransaction()
-        {
 
-
-            return _dbContext.Database.BeginTransaction();
-        }
-
-        public void Commit()
-        {
-            _dbContext.Database.CommitTransaction();
-
-        }
-
-        public void RollBack()
-        {
-            _dbContext.Database.RollbackTransaction();
-
-        }
 
         public IQueryable<T> GetTableAsTracking()
         {
@@ -100,6 +83,21 @@ namespace School.Infrastructure.Bases
             var result = GetById(id);
             if (result == null) return false;
             return true;
+        }
+
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return await _dbContext.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitAsync(IDbContextTransaction transaction)
+        {
+            await transaction.CommitAsync();
+        }
+
+        public async Task RollBackAsync(IDbContextTransaction transaction)
+        {
+            await transaction.RollbackAsync();
         }
 
 
