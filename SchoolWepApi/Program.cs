@@ -117,6 +117,7 @@ namespace SchoolWepApi
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();

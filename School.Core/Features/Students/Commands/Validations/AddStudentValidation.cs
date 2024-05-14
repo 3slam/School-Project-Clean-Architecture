@@ -19,6 +19,10 @@ namespace School.Core.Features.Students.Commands.Validations
                .NotEmpty().WithMessage("The {PropertName} must be not empty")
                .NotNull().WithMessage("The {PropertName} must be not empty");
 
+            RuleFor(student => student.Age)
+              .NotEmpty().WithMessage("The {PropertName} must be not empty")
+              .NotNull().WithMessage("The {PropertName} must be not empty");
+
             RuleFor(studentService => studentService.Id)
                 .MustAsync(async (Id, CancellationToken) =>
                 {

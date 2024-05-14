@@ -62,6 +62,7 @@ namespace School.Core.Mappers.Students
                   .ForMember(desination => desination.StFname, opt => opt.MapFrom(source => source.FirstName))
                   .ForMember(desination => desination.StLname, opt => opt.MapFrom(source => source.LastName))
                   .ForMember(desination => desination.StAddress, opt => opt.MapFrom(source => source.LastName))
+                   .ForMember(desination => desination.StAge, opt => opt.MapFrom(source => source.Age))
                                 .ForMember(desination => desination.DepartmentId, opt => opt.MapFrom(source => 3))
                   ;
         }
