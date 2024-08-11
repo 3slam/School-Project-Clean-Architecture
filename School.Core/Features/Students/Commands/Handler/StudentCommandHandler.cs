@@ -13,10 +13,10 @@ using School.Service.IService;
 namespace School.Core.Features.Students.Commands.Handler
 {
     public class StudentDepartmentHandler(
-        IStringLocalizer<SharedResourses> localizer,
-
-        IFileService fileService,
         IStudentService studentService,
+        IStringLocalizer<SharedResourses> localizer,
+        IFileService fileService,
+     
         IMapper mapper)
           : ResponseHandler(localizer),
            IRequestHandler<AddStudentCommand, Response<string>>,
@@ -35,11 +35,17 @@ namespace School.Core.Features.Students.Commands.Handler
                     error = error + item.ErrorMessage;
                 return BadRequest<string>(error);
             }
-            Student afterMapping = mapper.Map<Student>(request);
-            afterMapping.Image = await IFormFileToString(request.ImageFile);
-            return Created(await studentService.AddStudnetAsync(afterMapping),
-                Meta: new { Name = request.FirstName + " " + request.LastName, StudentId = request.Id }
-            );
+            try
+            {
+                Student afterMapping = mapper.Map<Student>(request);
+                afterMapping.Image = await IFormFileToString(request.ImageFile);
+                var entity = await studentService.AddStudnetAsync(afterMapping);
+                return Created(entity, Meta: new { Name = request.FirstName + " " + request.LastName, StudentId = request.Id });
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest<string>("Not created");
+            }
         }
 
         public async Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)

@@ -15,7 +15,7 @@
         public List<string> Messages { get; set; }
         public bool IsSuccess { get; set; }
 
-        private PaginationResponse(
+        public PaginationResponse(
             List<T> data,
             int currentPage,
             int pageSize,
@@ -32,7 +32,14 @@
             NextPageUrl = nextPageUrl;
             PrevousPageUrl = prevousPageUrl;
         }
-
+        public PaginationResponse(
+           List<T> data 
+           
+       )
+        {
+            Data = data;
+            
+        }
         public static PaginationResponse<T> Seccuss(List<T> data, int count, int pageNumber, int pageSize)
         {
             string NextPageUrl = "No Next";

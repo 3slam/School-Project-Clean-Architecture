@@ -12,9 +12,10 @@ using School.Service.IService;
 
 namespace School.Core.Features.Students.Queries.Handler
 {
-    public class DepartmentHandler(
+    public class StudentHandler(
         IStringLocalizer<SharedResourses> localizer,
-        IStudentService studentService, IMapper mapper)
+        IStudentService studentService,
+        IMapper mapper)
         : ResponseHandler(localizer),
         IRequestHandler<GetStudentListQuery, Response<List<GetStudentListResponse>>>,
         IRequestHandler<GetStudentByIdQuery, Response<GetSingleStudentResponse>>,

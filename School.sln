@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolWepApi", "SchoolWepApi\SchoolWepApi.csproj", "{D2E39E73-C311-455C-A6FE-CE70E76E62A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolWepApi", "SchoolWepApi\SchoolWepApi.csproj", "{D2E39E73-C311-455C-A6FE-CE70E76E62A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Core", "School.Core\School.Core.csproj", "{55721EB2-2F16-4889-9CD1-403D76371E65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Core", "School.Core\School.Core.csproj", "{55721EB2-2F16-4889-9CD1-403D76371E65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Data", "School.Data\School.Data.csproj", "{9CCCE039-4D40-47ED-9991-20EE6D9BED8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Data", "School.Data\School.Data.csproj", "{9CCCE039-4D40-47ED-9991-20EE6D9BED8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Infrastructure", "School.Infrastructure\School.Infrastructure.csproj", "{100C23D8-0593-4A8A-91BD-CC9030383A1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Infrastructure", "School.Infrastructure\School.Infrastructure.csproj", "{100C23D8-0593-4A8A-91BD-CC9030383A1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Service", "School.Service\School.Service.csproj", "{CDA4C64F-28A8-44B7-A554-1BB9ACABF7BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Service", "School.Service\School.Service.csproj", "{CDA4C64F-28A8-44B7-A554-1BB9ACABF7BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Tests", "School.Tests\School.Tests.csproj", "{AE0D59E5-75D5-4E21-ABE6-19DE34FEB7F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CDA4C64F-28A8-44B7-A554-1BB9ACABF7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDA4C64F-28A8-44B7-A554-1BB9ACABF7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDA4C64F-28A8-44B7-A554-1BB9ACABF7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0D59E5-75D5-4E21-ABE6-19DE34FEB7F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0D59E5-75D5-4E21-ABE6-19DE34FEB7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0D59E5-75D5-4E21-ABE6-19DE34FEB7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0D59E5-75D5-4E21-ABE6-19DE34FEB7F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
